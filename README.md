@@ -1,0 +1,2 @@
+# Static website for CSUpgrade
+
