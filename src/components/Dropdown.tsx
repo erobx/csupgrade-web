@@ -6,7 +6,7 @@ export default function Dropdown({ setLoggedIn }: { setLoggedIn: (loggedIn: bool
   const handleClick = () => {
     const elem = document.activeElement
     if (elem) {
-      elem.blur()
+      (elem as HTMLElement).blur()
     }
   }
 

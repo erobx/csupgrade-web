@@ -33,7 +33,7 @@ function TradeupsHome() {
         {rarityOrder.filter(r => r !== "All").map(rarity => (
           <input
             key={rarity}
-            className={`btn btn-soft ${btnMap[rarity] || ''}`}
+            className={`btn btn-soft ${btnMap[rarity as keyof typeof btnMap] || ''}`}
             type="radio"
             name="rarity"
             aria-label={rarity}

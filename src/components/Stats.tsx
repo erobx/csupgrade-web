@@ -9,7 +9,7 @@ export default function Stats({ user }: { user: User }) {
   const [winnings, setWinnings] = useState<Skin[]>([])
   const [entered, setEntered] = useState(0)
   const [won, setWon] = useState(0)
-  const [earnings, setEarnings] = useState(0)
+  const [earnings ] = useState(0)
   
   const fetchStats = async () => {
     const jwt: any = localStorage.getItem("jwt")

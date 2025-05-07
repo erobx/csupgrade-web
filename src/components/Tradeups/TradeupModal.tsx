@@ -38,7 +38,10 @@ export default function TradeupModal({ tradeupId, rarity }: { tradeupId: string,
 
   const onClick = () => {
     if (loggedIn) {
-      document.getElementById('modal_add').showModal()
+      const modal = document.getElementById('modal_add')
+      if (modal) {
+        (modal as HTMLDialogElement).showModal()
+      }
     } else {
       navigate("/login")
     }

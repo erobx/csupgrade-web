@@ -76,7 +76,7 @@ export const btnMap = {
     "Classified": "btn-classified",
     "Covert": "btn-covert",
     "Contraband": "btn-contraband",
-}
+} as const
 
 export const wears = [
     "Battle-Scarred",

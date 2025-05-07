@@ -9,7 +9,7 @@ export default function CountdownTimer({ stopTime }: { stopTime: any }) {
     const now = new Date();
     
     // Calculate the difference
-    const difference = stopDate - now;
+    const difference = stopDate.getTime() - now.getTime();
     
     // If time has passed, return all zeros
     if (difference <= 0) {

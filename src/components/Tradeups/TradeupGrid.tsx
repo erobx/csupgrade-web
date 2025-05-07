@@ -68,7 +68,10 @@ function GridItem({ invId, tradeupId, name, wear, price, isStatTrak, imgSrc, own
 
   const onSelect = () => {
     if (owned && status !== "Completed") {
-      document.getElementById(`modal_${invId}`).showModal()
+      const modal = document.getElementById(`modal_${invId}`)
+      if (modal) {
+        (modal as HTMLDialogElement).showModal()
+      }
     }
   }
 

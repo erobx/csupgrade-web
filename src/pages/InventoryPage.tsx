@@ -5,7 +5,6 @@ import PageSelector from "../components/PageSelector"
 import { useInventory } from "../providers/InventoryProvider"
 import { Skin } from "../types/skin"
 import { rarityOrder } from "../constants/constants"
-import useAuth from "../stores/authStore"
 
 export default function InventoryPage() {
   const { inventory, removeItem } = useInventory()
@@ -63,7 +62,12 @@ export default function InventoryPage() {
           currentItems.map((item) => (
             <div key={item.invId} className="card bg-base-300">
               {item.data ? (
-                <div key={item.invId} className="item" onClick={() => document.getElementById(`modal_${item.invId}`).showModal()}>
+                <div key={item.invId} className="item" onClick={() => {
+                  const modal = document.getElementById(`modal_${item.invId}`)
+                  if (modal) {
+                    (modal as HTMLDialogElement).showModal()
+                  }
+                  }}>
                   <InventoryItem skin={item.data} />
                   <ItemModal
                     invId={item.invId}
@@ -141,10 +145,10 @@ function InventoryItem({ skin }: { skin: Skin }) {
 }
 
 function ItemModal({ invId, skin, removeItem }: { invId: string, skin: Skin, removeItem: (invId: string) => void }) {
-  const { user } = useAuth()
+  //const { user } = useAuth()
 
   const onClick = async () => {
-    const jwt = localStorage.getItem("jwt")
+    //const jwt = localStorage.getItem("jwt")
     const res = await fetch("")
     if (res.status !== 204) {
       return

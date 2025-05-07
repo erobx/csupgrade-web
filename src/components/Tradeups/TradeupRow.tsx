@@ -15,7 +15,7 @@ interface TradeupRowProps {
 }
 
 export default function TradeupRow({ id, players, rarity, items, mode }: TradeupRowProps) {
-  const dividerColor: string = dividerMap[rarity]
+  const dividerColor: string = dividerMap[rarity as keyof typeof dividerMap]
 
   let skins: Skin[] = []
   if (items.length > 0) {
