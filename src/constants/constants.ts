@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.VITE_API_URL || 'http://localhost:8080'
+export const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 export const rarities = [
     "Consumer",
@@ -76,7 +76,7 @@ export const btnMap = {
     "Classified": "btn-classified",
     "Covert": "btn-covert",
     "Contraband": "btn-contraband",
-} as const
+}
 
 export const wears = [
     "Battle-Scarred",
