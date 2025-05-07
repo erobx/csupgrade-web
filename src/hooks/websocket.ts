@@ -3,6 +3,7 @@ import { Tradeup } from "../types/tradeup";
 import { useInventory } from "../providers/InventoryProvider";
 import { InventoryItem } from "../types/inventory";
 import { useNotification } from "../stores/notificationStore";
+import { BASE_URL } from "../constants/constants";
 
 export function useWebSocket(userId: string) {
   const [tradeups, setTradeups] = useState<Tradeup[]>([])
@@ -17,8 +18,8 @@ export function useWebSocket(userId: string) {
     function connectWebSocket() {
       // If user is logged in, send their userId; o/w connect as anon
       const socketUrl = userId
-        ? `/ws?userId=${userId}`
-        : `/ws`
+        ? BASE_URL+`/ws?userId=${userId}`
+        : BASE_URL+`/ws`
 
       ws.current = new WebSocket(socketUrl)
 
