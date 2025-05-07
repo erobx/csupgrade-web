@@ -12,7 +12,9 @@ export default function Navbar() {
         {!loggedIn && (
           <Link to="/" className="btn btn-ghost text-xl">Home</Link>
         )}
-        <Link to="/dashboard" className="btn btn-ghost text-lg">Dashboard</Link>
+        {loggedIn && (
+          <Link to="/dashboard" className="btn btn-ghost text-lg">Dashboard</Link>
+        )}
         <Link to="/tradeups" className="btn btn-ghost text-lg">Tradeups</Link>
         <Link to="/store" className="btn btn-ghost text-lg">Store</Link>
       </div>
