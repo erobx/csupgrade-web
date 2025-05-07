@@ -2,6 +2,7 @@ import { useInventory } from "../../providers/InventoryProvider";
 import { useNotification } from "../../stores/notificationStore";
 import { InventoryItem } from "../../types/inventory";
 import { Skin } from "../../types/skin";
+import { BASE_URL } from "../../constants/constants"
 import StatTrakBadge from "../StatTrakBadge";
 import TradeupModal from "./TradeupModal"
 
@@ -117,7 +118,7 @@ function Modal({ invId, tradeupId, setItemVisibility }: ModalProps) {
   const onClick = async () => {
     const jwt = localStorage.getItem("jwt")
     try {
-      const res = await fetch(`http://localhost:8080/v1/tradeups/${tradeupId}/remove?invId=${invId}`, {
+      const res = await fetch(BASE_URL+`/v1/tradeups/${tradeupId}/remove?invId=${invId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${jwt}`,

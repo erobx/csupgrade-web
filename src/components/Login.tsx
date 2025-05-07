@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useInventory } from "../providers/InventoryProvider"
 import { Inventory } from "../types/inventory"
 import { User } from "../types/user"
+import { BASE_URL } from "../constants/constants"
 
 type Response = {
   user: User;
@@ -26,7 +27,7 @@ export const submitLogin = async (email: string, password: string): Promise<Resp
   }
 
   try {
-      const res = await fetch("/auth/login", opts)
+      const res = await fetch(BASE_URL + "/auth/login", opts)
       const data: Promise<Response> = await res.json()
       return data
   } catch (error) {

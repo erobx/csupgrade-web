@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { InventoryItem, Inventory } from "../types/inventory";
+import { BASE_URL } from "../constants/constants"
 
 interface InventoryContextType {
   inventory: Inventory | null;
@@ -23,7 +24,7 @@ export function InventoryProvider({ children, userId }: InventoryProviderProps) 
   useEffect(() => {
     async function fetchInventory() {
       const jwt = localStorage.getItem("jwt")
-      const res = await fetch(`/v1/users/inventory?userId=${userId}`, {
+      const res = await fetch(BASE_URL + `/v1/users/inventory?userId=${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${jwt}`,

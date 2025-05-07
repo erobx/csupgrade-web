@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../stores/authStore"
+import { BASE_URL } from "../constants/constants";
 
 // {"username":"","email":"","password":""}
 export const submitSignup = async (username: string, email: string, password: string) => {
@@ -19,7 +20,7 @@ export const submitSignup = async (username: string, email: string, password: st
     }
 
     try {
-        const res = await fetch("auth/register", opts)
+        const res = await fetch(BASE_URL+"auth/register", opts)
         const data = await res.json()
         return data
     } catch (error) {

@@ -3,6 +3,7 @@ import { User } from "../types/user"
 import RarityBadge from "./RarityBadge"
 import StatTrakBadge from "./StatTrakBadge"
 import { Skin } from "../types/skin"
+import { BASE_URL } from "../constants/constants"
 
 export default function Stats({ user }: { user: User }) {
   const [winnings, setWinnings] = useState<Skin[]>([])
@@ -13,7 +14,7 @@ export default function Stats({ user }: { user: User }) {
   const fetchStats = async () => {
     const jwt: any = localStorage.getItem("jwt")
     try {
-      const res = await fetch(`/v1/users/${user.id}/stats`, {
+      const res = await fetch(BASE_URL+`/v1/users/${user.id}/stats`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${jwt}`,

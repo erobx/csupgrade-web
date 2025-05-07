@@ -12,6 +12,7 @@ import Navbar from './components/Navbar'
 import Notification from './components/Notification'
 import useAuth from './stores/authStore'
 import { useEffect, useState } from 'react'
+import { BASE_URL } from './constants/constants'
 
 export default function App() {
   const { loggedIn, setUser, setLoggedIn } = useAuth()
@@ -24,7 +25,7 @@ export default function App() {
       const jwt = localStorage.getItem("jwt")
       if (jwt) {
         try {
-          const res = await fetch(`/v1/users`, {
+          const res = await fetch(BASE_URL+`/v1/users`, {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${jwt}`
@@ -36,7 +37,7 @@ export default function App() {
             if (newToken) {
               localStorage.setItem("jwt", newToken)
 
-              const retryRes = await fetch(`/v1/users`, {
+              const retryRes = await fetch(BASE_URL+`/v1/users`, {
                 method: "GET",
                 headers: {
                   Authorization: `Bearer ${newToken}`

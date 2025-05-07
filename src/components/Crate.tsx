@@ -1,3 +1,4 @@
+import { BASE_URL } from "../constants/constants";
 import { useInventory } from "../providers/InventoryProvider";
 import useAuth from "../stores/authStore"
 import { useNotification } from "../stores/notificationStore";
@@ -24,7 +25,7 @@ export default function Crate({ crateId, name, amount, cost }: CrateProps) {
     const jwt = localStorage.getItem("jwt")
     if (user) {
       try {
-        const res = await fetch(`
+        const res = await fetch(BASE_URL + `
           /v1/store/buy?userId=${user.id}&crateId=${crateId}&amount=${amount}`, {
           method: "POST",
           headers: {

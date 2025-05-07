@@ -5,6 +5,7 @@ import StatTrakBadge from "../StatTrakBadge"
 import useAuth from "../../stores/authStore"
 import { useNavigate } from "react-router"
 import { useNotification } from "../../stores/notificationStore"
+import { BASE_URL } from "../../constants/constants"
 
 export default function TradeupModal({ tradeupId, rarity }: { tradeupId: string, rarity: string }) {
   const { loggedIn } = useAuth()
@@ -96,7 +97,7 @@ function ModalItem({ invId, tradeupId, skin, setItemVisibility }: ModalItemProps
     const jwt = localStorage.getItem("jwt")
     if (!user) return
     try {
-      const res = await fetch(`/v1/tradeups/${tradeupId}/add?invId=${invId}`, {
+      const res = await fetch(BASE_URL+`/v1/tradeups/${tradeupId}/add?invId=${invId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${jwt}`,

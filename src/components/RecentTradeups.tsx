@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router"
 import { User } from "../types/user"
 import { InventoryItem } from "../types/inventory"
+import { BASE_URL } from "../constants/constants"
 
 type Row = {
   id: string;
@@ -20,7 +21,7 @@ export default function RecentTradeups({ user }: { user: User }) {
     try {
       setIsLoading(true)
       const jwt: any = localStorage.getItem("jwt")
-      const res = await fetch(`/v1/users/${user.id}/recents`, {
+      const res = await fetch(BASE_URL+`/v1/users/${user.id}/recents`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${jwt}`,
