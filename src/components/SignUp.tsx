@@ -20,7 +20,7 @@ export const submitSignup = async (username: string, email: string, password: st
     }
 
     try {
-        const res = await fetch(BASE_URL+"auth/register", opts)
+        const res = await fetch(BASE_URL+"/auth/register", opts)
         const data = await res.json()
         return data
     } catch (error) {

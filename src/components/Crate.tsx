@@ -25,8 +25,7 @@ export default function Crate({ crateId, name, amount, cost }: CrateProps) {
     const jwt = localStorage.getItem("jwt")
     if (user) {
       try {
-        const res = await fetch(BASE_URL + `
-          /v1/store/buy?userId=${user.id}&crateId=${crateId}&amount=${amount}`, {
+        const res = await fetch(BASE_URL+`/v1/store/buy?userId=${user.id}&crateId=${crateId}&amount=${amount}`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${jwt}`,
