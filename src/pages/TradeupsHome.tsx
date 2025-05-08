@@ -13,7 +13,7 @@ function TradeupsHome() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 5000)
+    }, 7000)
 
     return () => clearTimeout(timer)
   }, [])
