@@ -1,13 +1,28 @@
 import { useWS } from "../providers/WebSocketProvider"
 import { Tradeup } from "../types/tradeup"
 import TradeupRow from "../components/Tradeups/TradeupRow"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { btnMap, rarityOrder } from "../constants/constants"
 import Footer from "../components/Footer"
 
 function TradeupsHome() {
   const { tradeups } = useWS()
   const [selectedRarity, setSelectedRarity] = useState("All")
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (tradeups.length > 0) {
+      setLoading(false)
+    }
+  }, [tradeups])
 
   const sorted = tradeups.sort((a, b) => b.items.length - a.items.length)
   const displayTradeups = selectedRarity === "All"
@@ -56,7 +71,14 @@ function TradeupsHome() {
         )
       ) : (
         <div className="card p-8 bg-base-300">
-          <h1 className="font-bold text-info">No tradeups available.</h1>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center">
+              <div className="loading loading-spinner"></div>
+              <p className="text-info font-medium">Loading tradeups...</p>
+            </div>
+          ) : (
+            <h1 className="font-bold text-info">No tradeups available.</h1>
+          )}
         </div>
       )}
       <div className="flex flex-grow"></div>
