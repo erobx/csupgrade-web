@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import Footer from "../components/Footer"
+import React, { useEffect, useRef, useState } from "react"
 
 export default function Home() {
   return (
@@ -32,11 +33,64 @@ function PageTop() {
 }
 
 function PageMiddle() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [isDrawing, setIsDrawing] = useState(false)
+
+  const startDrawing = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    setIsDrawing(true)
+    const ctx = canvasRef.current?.getContext("2d")
+    if (ctx) {
+      ctx.beginPath()
+      ctx.moveTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY)
+    }
+  }
+
+  const draw = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isDrawing) return
+    const ctx = canvasRef.current?.getContext("2d")
+    if (ctx) {
+      ctx.lineWidth = 2
+      ctx.lineCap = "round"
+      ctx.strokeStyle = "black"
+      ctx.lineTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY)
+      ctx.stroke()
+    }
+  }
+
+  const stopDrawing = () => {
+    setIsDrawing(false)
+    const ctx = canvasRef.current?.getContext("2d")
+    if (ctx) {
+      ctx.closePath()
+    }
+  }
+
+  const resizeCanvas = () => {
+    const canvas = canvasRef.current
+    const container = containerRef.current
+    if (canvas && container) {
+      canvas.width = container.offsetWidth
+      canvas.height = container.offsetHeight
+    }
+  }
+
+  useEffect(() => {
+    resizeCanvas()
+    window.addEventListener("resize", resizeCanvas)
+    return () => window.removeEventListener("resize", resizeCanvas)
+  }, [])
+
   return (
-    <div className="hero bg-base-200 flex-grow">
-      <div className="hero-content text-center justify-between">
-        <h1 className="text-4xl font-bold">Over ....</h1>
-      </div>
+    <div ref={containerRef} className="hero bg-base-200 flex-grow relative" style={{ backgroundImage: "url(contract.png)", backgroundSize: "contain"}}>
+      <canvas
+        ref={canvasRef}
+        className="absolute"
+        onMouseDown={startDrawing}
+        onMouseMove={draw}
+        onMouseUp={stopDrawing}
+        onMouseLeave={stopDrawing}
+      ></canvas>
     </div>
   )
 }
