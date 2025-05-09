@@ -96,7 +96,7 @@ function ModalItem({ invId, tradeupId, skin, setItemVisibility }: ModalItemProps
   const { addNotification } = useNotification()
 
   const addSkin = async () => {
-    console.log(`adding skin ${invId} to tradeup ${tradeupId}...`)
+    //console.log(`adding skin ${invId} to tradeup ${tradeupId}...`)
     const jwt = localStorage.getItem("jwt")
     if (!user) return
     try {

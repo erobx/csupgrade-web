@@ -154,7 +154,6 @@ function ItemModal({ invId, skin, removeItem }: { invId: string, skin: Skin, rem
       return
     }
     removeItem(invId)
-    console.log("deleted: ", invId)
   }
 
   const createdAt = new Date(skin.createdAt.toString().replace("Z", "")).toDateString()
