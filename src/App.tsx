@@ -76,14 +76,9 @@ export default function App() {
 
   return (
     <InventoryProvider userId={userID}>
-      {/* Conditionally render WebSocketProvider only when we have a real userId */}
-      {authReady && userID ? (
-        <WebSocketProvider userId={userID}>
-          <AppContent loggedIn={loggedIn} />
-        </WebSocketProvider>
-      ) : (
+      <WebSocketProvider userId={userID}>
         <AppContent loggedIn={loggedIn} />
-      )}
+      </WebSocketProvider>
     </InventoryProvider>  )
 }
 
