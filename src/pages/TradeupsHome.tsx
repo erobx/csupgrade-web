@@ -6,9 +6,14 @@ import { btnMap, rarityOrder } from "../constants/constants"
 import Footer from "../components/Footer"
 
 function TradeupsHome() {
-  const { tradeups } = useWS()
+  const { tradeups, subscribeToAll, unsubscribe } = useWS()
   const [selectedRarity, setSelectedRarity] = useState("All")
   const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    subscribeToAll()
+    return () => unsubscribe()
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
