@@ -17,7 +17,6 @@ import { BASE_URL } from './constants/constants'
 export default function App() {
   const { loggedIn, setUser, setLoggedIn } = useAuth()
   const [userID, setUserID] = useState("")
-  const [authReady, setAuthReady] = useState(false)
 
   useEffect(() => {
     async function fetchUser() {
@@ -68,7 +67,6 @@ export default function App() {
           setUser(null)
         }
       }
-        setAuthReady(true)
     }
 
     fetchUser()
