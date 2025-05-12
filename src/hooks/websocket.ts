@@ -24,7 +24,6 @@ export function useWebSocket(userId: string) {
       ws.current = new WebSocket(socketUrl)
 
       ws.current.onopen = () => {
-        console.log("WebSocket connected")
         setIsConnected(true)
       }
 
@@ -48,7 +47,6 @@ export function useWebSocket(userId: string) {
       }
 
       ws.current.onclose = () => {
-        console.log("WebSocket disconnected, reconnecting...")
         setTimeout(connectWebSocket, 2000) // Auto-reconnect
         setIsConnected(false)
       }

@@ -2,6 +2,7 @@ import { useState } from "react"
 import RarityBadge from "../components/RarityBadge"
 import StatTrakBadge from "../components/StatTrakBadge"
 import PageSelector from "../components/PageSelector"
+import { Link } from "react-router"
 import { useInventory } from "../providers/InventoryProvider"
 import { Skin } from "../types/skin"
 import { rarityOrder } from "../constants/constants"
@@ -55,57 +56,65 @@ export default function InventoryPage() {
 
   return (
     <div className="flex lg:flex-row gap-6 items-center md:flex-col lg:items-start md:w-fit md:m-auto md:mt-5">
-      <div className="grid grid-cols-3 lg:grid-cols-6 gap-2">
-        {inventory.items.length === 0 ? (
-          <h1 className="text-xl font-bold text-info">Visit the Store for more skins!</h1>
-        ) : (
-          currentItems.map((item) => (
-            <div key={item.invId} className="card bg-base-300">
-              {item.data ? (
-                <div key={item.invId} className="item" onClick={() => {
-                  const modal = document.getElementById(`modal_${item.invId}`)
-                  if (modal) {
-                    (modal as HTMLDialogElement).showModal()
-                  }
-                  }}>
-                  <InventoryItem skin={item.data} />
-                  <ItemModal
-                    invId={item.invId}
-                    skin={item.data}
-                    removeItem={removeItem}
-                  />
-                </div>
-              ) : (
-                <div className="loading-spinner loading-xl"></div>
-              )}
+      {inventory.items.length === 0 ? (
+        <div className="card bg-base-300 shadow-xl p-8 mx-auto text-center">
+          <div className="card-body flex flex-col items-center">
+            <h1 className="text-xl font-bold text-info mb-4">Your inventory is empty!</h1>
+            <p className="mb-4">Visit the store to get started!</p>
+            <div className="card-actions justify-center">
+              <Link to="/store" className="btn btn-primary">Go to Store</Link>
             </div>
-          ))
-        )}
-      </div>
-
-      <div className="card flex flex-col items-center text-center gap-3 bg-base-300 p-4 h-fit w-full lg:w-fit md:mb-4">
-        <h1 className="font-bold text-lg">Filters</h1>
-        <form className="filter" onClick={handleFilter}>
-          <input className="btn btn-square" type="reset" value="×"/>
-          <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Rarity"/>
-          <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Wear"/>
-          <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Price"/>
-          <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="A-Z"/>
-        </form>
-        <div className="w-full">
-          <button className="btn btn-error w-full">Enter delete mode</button>
-        </div>
-      </div>
-
-      <div className="fixed bottom-4 right-8 z-30">
-        <div className="join">
-          <button className="join-item btn" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>«</button>
-          <div className="join-item btn"> 
-            <PageSelector totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
           </div>
-          <button className="join-item btn" onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>»</button>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-2">
+            {currentItems.map((item) => (
+              <div key={item.invId} className="card bg-base-300">
+                {item.data ? (
+                  <div key={item.invId} className="item" onClick={() => {
+                    const modal = document.getElementById(`modal_${item.invId}`)
+                    if (modal) {
+                      (modal as HTMLDialogElement).showModal()
+                    }
+                  }}>
+                    <InventoryItem skin={item.data} />
+                    <ItemModal
+                      invId={item.invId}
+                      skin={item.data}
+                      removeItem={removeItem}
+                    />
+                  </div>
+                ) : (
+                  <div className="loading-spinner loading-xl"></div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="card flex flex-col items-center text-center gap-3 bg-base-300 p-4 h-fit w-full lg:w-82 md:mb-4">
+            <h1 className="font-bold text-lg">Filters</h1>
+            <form className="filter" onClick={handleFilter}>
+              <input className="btn btn-square" type="reset" value="×"/>
+              <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Rarity"/>
+              <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Wear"/>
+              <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="Price"/>
+              <input className="btn btn-neutral" type="radio" name="frameworks" aria-label="A-Z"/>
+            </form>
+            {/*<div className="w-full">
+              <button className="btn btn-error w-full">Enter delete mode</button>
+            </div>*/}
+          </div>
+          <div className="fixed bottom-4 right-8 z-40">
+            <div className="join">
+              <button className="join-item btn" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>«</button>
+              <div className="join-item btn"> 
+                <PageSelector totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              </div>
+              <button className="join-item btn" onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>»</button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }
