@@ -33,7 +33,7 @@ export default function Crate({ crateId, name, amount, cost }: CrateProps) {
         })
 
         if (res.status === 500) {
-          addNotification("Insufficient funds", "warning")
+          addNotification("We're sorry. We can't process the request right now.", "error")
           return
         }
 

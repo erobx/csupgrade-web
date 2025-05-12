@@ -26,7 +26,6 @@ export function useWebSocket(userId: string) {
       ws.current.onopen = () => {
         console.log("WebSocket connected")
         setIsConnected(true)
-        //subscribeToAll() // default to all tradeups
       }
 
       ws.current.onmessage = (event: any) => {
@@ -86,11 +85,5 @@ export function useWebSocket(userId: string) {
     }
   }
 
-  function sendLogin(userId: string) {
-    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-      ws.current.send(JSON.stringify({ event: "login", userId }))
-    }
-  }
-
-  return { tradeups, currentTradeup, clearCurrentTradeup, winningItem, subscribeToAll, subscribeToTradeup, unsubscribe, sendLogin, isConnected }
+  return { tradeups, currentTradeup, clearCurrentTradeup, winningItem, subscribeToAll, subscribeToTradeup, unsubscribe, isConnected }
 }

@@ -8,13 +8,13 @@ function TradeupDetails() {
   const params = useParams()
   const navigate = useNavigate()
   const tradeupId = params.tradeupId
-  const { currentTradeup, clearCurrentTradeup, subscribeToTradeup, unsubscribe } = useWS()
+  const { currentTradeup, clearCurrentTradeup, subscribeToTradeup, unsubscribe, isConnected } = useWS()
   const textColor: string = ""
 
   useEffect(() => {
-    if (tradeupId) subscribeToTradeup(tradeupId)
+    if (tradeupId && isConnected) subscribeToTradeup(tradeupId)
     return () => { clearCurrentTradeup(); unsubscribe(); }
-  }, [tradeupId])
+  }, [tradeupId, isConnected])
 
   const sortedItems = useMemo(() => {
     if (!currentTradeup) return

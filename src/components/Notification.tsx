@@ -15,12 +15,40 @@ export default function Notification() {
   }, [notifications])
 
   return (
-    <div className="toast toast-end z-40">
-      {notifications.map((notification, index) => (
-        <div key={index} className={`alert alert-${notification.type}`}>
-          <span>{notification.message}</span>
-        </div>
-      ))}
+    <div className="toast toast-end z-10">
+      {notifications.map((notification, index) => {
+        if (notification.type === "success") {
+          return (
+            <div key={index} className="alert alert-success">
+              <span>{notification.message}</span>
+            </div>
+          )
+        } else if (notification.type === "error") {
+          return (
+            <div key={index} className="alert alert-error">
+              <span>{notification.message}</span>
+            </div>
+          )
+        } else if (notification.type === "info") {
+          return (
+            <div key={index} className="alert alert-info">
+              <span>{notification.message}</span>
+            </div>
+          )
+        } else if (notification.type === "warning") {
+          return (
+            <div key={index} className="alert alert-warning">
+              <span>{notification.message}</span>
+            </div>
+          )
+        } else {
+          return (
+            <div key={index} className="alert">
+              <span>{notification.message}</span>
+            </div>
+          )
+        }
+      })}
     </div>
   )
 }

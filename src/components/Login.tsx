@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router"
 import useAuth from "../stores/authStore"
 import { useState } from "react"
 import { useInventory } from "../providers/InventoryProvider"
@@ -36,7 +35,6 @@ export const submitLogin = async (email: string, password: string): Promise<Resp
 }
 
 export default function Login() {
-  const navigate = useNavigate()
   const { setUser, setLoggedIn } = useAuth()
   const { setInventory } = useInventory()
 
@@ -57,8 +55,8 @@ export default function Login() {
         setInventory(data.inventory)
 
         localStorage.setItem("jwt", data.jwt)
-        navigate("/dashboard")
         resetForm()
+        window.location.reload()
       } else {
         console.error("Login failed. Please check your credentials.")
       }
