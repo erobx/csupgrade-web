@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../stores/authStore"
 import { BASE_URL } from "../constants/constants";
+import { useInventory } from "../providers/InventoryProvider";
 
 // {"username":"","email":"","password":""}
 export const submitSignup = async (username: string, email: string, password: string) => {
@@ -31,6 +32,7 @@ export const submitSignup = async (username: string, email: string, password: st
 export default function SignUp() {
   const navigate = useNavigate()
   const { setUser, setLoggedIn } = useAuth()
+  const { setInventory } = useInventory()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -50,10 +52,12 @@ export default function SignUp() {
       const data = await submitSignup(username, email, password) 
       if (data) {
         setLoggedIn(true)
-        localStorage.setItem("jwt", data.jwt)
         setUser(data.user)
-        navigate("/")
+        setInventory(data.inventory)
+
+        localStorage.setItem("jwt", data.jwt)
         resetForm()
+        window.location.reload()
       } else {
         console.error("Sign up failed.")
       }
