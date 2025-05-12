@@ -25,6 +25,7 @@ export function useWebSocket(userId: string) {
 
       ws.current.onopen = () => {
         setIsConnected(true)
+        subscribeToAll()
       }
 
       ws.current.onmessage = (event: any) => {

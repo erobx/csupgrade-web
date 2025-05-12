@@ -27,8 +27,11 @@ export default function TradeupRow({ id, players, rarity, items, mode }: Tradeup
   const totalPrice: number = skins.reduce((acc, curr) => acc + curr.price, 0)
 
   return (
-    <div className="join bg-base-300 border-6 border-base-200 items-center w-full lg:w-3/4 rounded-md">
-      <div className="join-item">
+    /* Smaller screens */
+
+    /* Larger screens */
+    <div className="join bg-base-300 border-6 border-base-200 min-h-126 items-center w-3/4 rounded-md">
+      <div className="join-item basis-1/8">
         <InfoPanel 
           rarity={rarity} 
           count={items.length} 
@@ -36,12 +39,12 @@ export default function TradeupRow({ id, players, rarity, items, mode }: Tradeup
       </div>
       <div className={`divider divider-horizontal ${dividerColor}`}></div>
 
-      <div className="join-item w-5/8">
+      <div className="join-item basis-1/2">
         <ImageCarousel skins={skins} />
       </div>
       <div className="divider divider-horizontal divider-info"></div>
 
-      <div className="join-item w-1/6">
+      <div className="join-item basis-1/6">
         <DetailsPanel 
           total={totalPrice}
           players={players}
@@ -49,7 +52,7 @@ export default function TradeupRow({ id, players, rarity, items, mode }: Tradeup
       </div>
       <div className="divider divider-horizontal divider-primary"></div>
 
-      <div className="join-item">
+      <div className="join-item basis-1/8">
         <ButtonPanel tradeupId={id} mode={mode} />
       </div>
     </div>
@@ -60,18 +63,12 @@ function InfoPanel({ rarity, count }: { rarity: string, count: number }) {
   const textColor: string = ""
 
   return (
-    <div className="card card-sm w-36">
-      <div className="card-body justify-center ml-4">
-        <div className="flex flex-col items-center">
-          <div className={`card-title font-bold m-auto ${textColor} text-xl`}>
-            {rarity}
-          </div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="card-title font-bold text-primary text-xl">
-            {count}
-          </div>
-        </div>
+    <div className="flex flex-col items-center">
+      <div className={`card-title font-bold m-auto ${textColor} text-xl`}>
+        {rarity}
+      </div>
+      <div className="card-title font-bold text-primary text-xl">
+        {count}
       </div>
     </div>
   )
