@@ -30,7 +30,7 @@ export default function TradeupRow({ id, players, rarity, items, mode }: Tradeup
     /* Smaller screens */
 
     /* Larger screens */
-    <div className="join bg-base-300 border-6 border-base-200 min-h-126 items-center w-3/4 rounded-md">
+    <div className="join bg-base-300 border-6 border-base-200 items-center w-3/4 rounded-md">
       <div className="join-item basis-1/8">
         <InfoPanel 
           rarity={rarity} 
