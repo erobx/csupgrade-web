@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import useAuth from "../stores/authStore"
 import { BASE_URL } from "../constants/constants";
 import { useInventory } from "../providers/InventoryProvider";
@@ -30,7 +29,6 @@ export const submitSignup = async (username: string, email: string, password: st
 }
 
 export default function SignUp() {
-  const navigate = useNavigate()
   const { setUser, setLoggedIn } = useAuth()
   const { setInventory } = useInventory()
   const [username, setUsername] = useState('')

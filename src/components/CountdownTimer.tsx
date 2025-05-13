@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function CountdownTimer({ stopTime }: { stopTime: string }) {
+export default function CountdownTimer({ stopTime }: { stopTime: Date}) {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
   
   function calculateTimeRemaining() {

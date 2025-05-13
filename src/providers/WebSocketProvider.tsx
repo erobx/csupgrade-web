@@ -6,13 +6,12 @@ import { InventoryItem } from "../types/inventory";
 interface WebSocketContextType {
   tradeups: Tradeup[];
   currentTradeup: Tradeup | null;
-  clearCurrentTradeup: () => void;
   winningItem: InventoryItem | null;
+  isConnected: boolean;
+  clearCurrentTradeup: () => void;
   subscribeToAll: () => void;
   subscribeToTradeup: (tradeupId: string) => void;
   unsubscribe: () => void;
-  sendLogin: (userId: string) => void;
-  isConnected: boolean;
 }
 
 const WebSocketContext = createContext<WebSocketContextType | null>(null)
